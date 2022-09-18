@@ -9,8 +9,8 @@
     <style>
         table {
             border-collapse: collapse;
-            border:solid 1px #000000;
         }
+
         input.imageAlign {
             vertical-align: middle;
         }
@@ -19,26 +19,31 @@
             width : "80px";
             background-color : #ebecec;
             text-align: center;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .td2 {
             width: "500px";
         }
+
+        #num1 {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div align="center">
+        <form>
         <table border = "1">
             <td class = "td1" colspan="2">회원 가입</td>
             <tr>
                 <td class = "td1">아이디</td>
-                <td class = "td2"><input type = "text"><input type = "image" src="image/check.gif" class="imageAlign" size = "20px"></td>
+                <td class = "td2"><input type = "text" size = "15px">  <input type = "image" src="image/check.gif" class="imageAlign" size = "20px"></td>
             </tr>
 
             <tr>
                 <td class = "td1">패스워드</td>
-                <td class = "td2"><input type = "password" size = "20px"></td>
+                <td class = "td2"><input type = "password" size = "15px"></td>
             </tr>
 
             <tr>
@@ -48,7 +53,7 @@
 
             <tr>
                 <td class = "td1">국적</td>
-                <td class = "td2"><input type = "text" value="대한민국" size = " 30px" readonly><input type = "text" value="국적변경" disabled size = "6px"></td>
+                <td class = "td2"><input type = "text" value="대한민국" size = "22px" readonly>  <input type = "text" value="국적변경" disabled size = "5px" id = "num1"></td>
             </tr>
 
             <tr>
@@ -62,20 +67,20 @@
                         <option value = "5">080</option>
                     </select>
                     -
-                    <input type = "text" size = "6px">
+                    <input type = "text" size = "4px">
                     -
-                    <input type ="text" size = "6px">
+                    <input type ="text" size = "4px">
                 </td>
             </tr>
 
             <tr>
                 <td class = "td1">이메일</td>
-                <td class = "td2"><input type = "email" size = "50px"></td>
+                <td class = "td2"><input type = "email" size = "38px"></td>
             </tr>
 
             <tr>
                 <td class = "td1">생일</td>
-                <td class = "td2"><input type = "datetime-local"></td>
+                <td class = "td2"><input type = "date"></td>
             </tr>
 
             <tr>
@@ -105,6 +110,7 @@
                 </td>
             </tr>
         </table>
+    </form>
     </div>      
 </body>
 </html>
