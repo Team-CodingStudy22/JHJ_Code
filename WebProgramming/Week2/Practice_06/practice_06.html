@@ -1,0 +1,70 @@
+<!-- 컴퓨터학과 20210815 주현정-->
+<!--chrome 으로 열었습니다-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice_06</title>
+    
+    <style>
+        table, td {
+            text-align: center;
+            font-size: 30px;
+            width: 450px;
+            height: 300px;
+        }
+        
+        td {
+            border : solid 1px #EDECED;
+        }
+        
+        .blue {
+            background-color: #33CCFE;
+            height: 50px;
+        }
+        
+        #second {
+            width: 2000px;
+        }
+        
+        img {
+            width: 230px;
+            height: 300px;
+        }
+    </style>
+    
+    <script>
+        function calc() {
+            var exp = prompt("계산할 수식을 입력하세요");
+            var result = eval(exp);
+            if(exp == null)
+                return;
+            else
+                alert(result);
+        }
+    </script>
+</head>
+<body>
+    <div align = "center">
+        <table>
+            <tr>
+                <td colspan = "2" class = "blue" style=" font: italic 1.5em/1em Georgia, serif ;">CalCuLaTor</td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <img src = "image/cal.jpg">
+                </td>
+                <td id = "second">
+                    <input type ="button" value="계산하기" onclick="calc()">
+                </td>
+            </tr>
+            
+            <tr>
+                <td class = "blue" colspan = "2"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
