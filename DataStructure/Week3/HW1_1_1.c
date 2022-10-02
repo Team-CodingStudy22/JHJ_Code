@@ -15,7 +15,7 @@ void init(StackType* s)
 
 int is_empty(StackType* s)
 {
-	return (s->top <= 0);
+	return (s->top == -1);
 }
 
 int is_full(StackType* s)
@@ -26,7 +26,7 @@ int is_full(StackType* s)
 void push(StackType* s, element item)
 {
 	if (is_full(s)) {
-		fprintf(stderr, "½ºÅÃ Æ÷È­ ¿¡·¯\n");
+		fprintf(stderr, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½\n");
 		return;
 	}
 	else
@@ -46,7 +46,7 @@ element pop(StackType* s)
 element peek(StackType* s)
 {
 	if (is_empty(s)) {
-		fprintf(stderr, "½ºÅÃ °ø¹é ¿¡·¯\n");
+		fprintf(stderr, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 		exit(1);
 	}
 	else
@@ -57,10 +57,14 @@ void stack_print(StackType* s)
 {
 	int i;
 
-	printf("%d  <- top\n", s->data[s->top]);
-
-	for (i = s->top - 1; i >= 0; i--)
-		printf("%d\n", s->data[i]);
+	if (is_empty(s))
+		printf("<empty>\n--\n");
+	else {
+		printf("%d  <- top\n", s->data[s->top]);
+		for (i = s->top - 1; i >= 0; i--)
+			printf("%d\n", s->data[i]);
+		printf("--\n");
+	}
 }
 
 void main()
@@ -68,42 +72,34 @@ void main()
 	StackType s;
 
 	init(&s);
-	if (is_empty(&s))
-		printf("<empty>\n--\n");
+	stack_print(&s);
 	
 	push(&s, 10);
 	stack_print(&s);
-	printf("--\n");
 
 	push(&s, 20);
 	stack_print(&s); 
-	printf("--\n");
 
 	push(&s, 30);
 	stack_print(&s);
-	printf("--\n");
 
 	push(&s, 40);
 	stack_print(&s);
-	printf("--\n");
 
 	pop(&s);
 	stack_print(&s);
-	printf("--\n");
 
 	push(&s, 50);
 	stack_print(&s);
-	printf("--\n");
 
 	pop(&s);
 	stack_print(&s);
-	printf("--\n");
 
 	pop(&s);
 	stack_print(&s);
-	printf("--\n");
 
 	pop(&s);
+	stack_print(&s);
 
 	return 0;
 }
