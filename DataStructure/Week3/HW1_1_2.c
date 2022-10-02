@@ -1,12 +1,16 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <string.h>
 #define MAX_STACK_SIZE 3
+#define MAX_STRING 100
 
-typedef int element;
-typedef char* element2;
+typedef struct {
+	int num;
+	char nums[MAX_STRING];
+} element;
 
 typedef struct {
 	element data[MAX_STACK_SIZE];
-	element2 data_name[MAX_STACK_SIZE];
 	int top;
 } StackType;
 
@@ -17,7 +21,7 @@ void init(StackType* s)
 
 int is_empty(StackType* s)
 {
-	return (s->top <= 0);
+	return (s->top == -1);
 }
 
 int is_full(StackType* s)
@@ -25,93 +29,94 @@ int is_full(StackType* s)
 	return (s->top == (MAX_STACK_SIZE - 1));
 }
 
-void push(StackType* s, element item, element2 *items)
+void push(StackType* s, element item)
 {
 	if (is_full(s)) {
-		fprintf(stderr, "½ºÅÃ Æ÷È­ ¿¡·¯\n");
+		fprintf(stderr, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½\n");
 		return;
 	}
-	else {
-		(s->top)++;
-		s->data[s->top] = item;
-		s->data_name[s->top] = items;
-	}
+	else
+		s->data[++(s->top)] = item;
 }
 
-StackType* pop(StackType* s)
+element pop(StackType* s)
 {
 	if (is_empty(s)) {
 		fprintf(stderr, "<empty>\n--\n");
 		exit(1);
 	}
-	else {
-		StackType* s1 = s;
-		(s->top)--;
-		return s1;
-	}
+	else
+		return s->data[(s->top)--];
 }
 
-StackType* peek(StackType* s)
+element peek(StackType* s)
 {
 	if (is_empty(s)) {
-		fprintf(stderr, "½ºÅÃ °ø¹é ¿¡·¯\n");
+		fprintf(stderr, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 		exit(1);
 	}
 	else
-		return s;
+		return s->data[s->top];
 }
 
 void stack_print(StackType* s)
 {
 	int i;
 
-	printf("[%d, %s] <- top\n", s->data[s->top], s->data_name[s->top]);
-
-	for (i = s->top - 1; i >= 0; i--)
-		printf("[%d, %s]\n", s->data[i], s->data_name[i]);
+	if (is_empty(s))
+		printf("<empty>\n--\n");
+	else {
+		printf("[%d, %s] <- top\n", s->data[s->top].num, s->data[s->top].nums);
+		for (i = s->top - 1; i >= 0; i--)
+			printf("[%d, %s]\n", s->data[i].num, s->data[i].nums);
+		printf("--\n");
+	}
 }
 
 void main()
 {
 	StackType s;
+	element e;
 
 	init(&s);
-	if (is_empty(&s))
-		printf("<empty>\n--\n");
-
-	push(&s, 10, "ten");
 	stack_print(&s);
-	printf("--\n");
 
-	push(&s, 20, "twenty");
+	e.num = 10;
+	strcpy(e.nums, "ten");
+	push(&s, e);
 	stack_print(&s);
-	printf("--\n");
+	
 
-	push(&s, 30, "thirty");
+	e.num = 20;
+	strcpy(e.nums, "twenty");
+	push(&s, e);
 	stack_print(&s);
-	printf("--\n");
 
-	push(&s, 40, "fourty");
+	e.num = 30;
+	strcpy(e.nums, "thirty");
+	push(&s, e);
 	stack_print(&s);
-	printf("--\n");
+
+	e.num = 40;
+	strcpy(e.nums, "fourty");
+	push(&s, e);
+	stack_print(&s);
 
 	pop(&s);
 	stack_print(&s);
-	printf("--\n");
 
-	push(&s, 50, "fifty");
+	e.num = 50;
+	strcpy(e.nums, "fifty");
+	push(&s, e);
 	stack_print(&s);
-	printf("--\n");
 
 	pop(&s);
 	stack_print(&s);
-	printf("--\n");
 
 	pop(&s);
 	stack_print(&s);
-	printf("--\n");
 
 	pop(&s);
+	stack_print(&s);
 
-	return 0;
 }
