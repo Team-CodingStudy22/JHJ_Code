@@ -1,0 +1,139 @@
+(1)
+select stu_id, name
+from student
+where address='서울' and
+    year=2;
+
+----------------스크립트 출력--------------------
+
+선택된 행 없음
+
+(2)
+select name, resident_id, address
+from student, department
+where year=2 and
+dept_name='산업공학과';
+
+----------------스크립트 출력--------------------
+
+NAME       RESIDENT_ID    ADDRESS   
+---------- -------------- ----------
+김현정     890902-2704012 대구    
+
+(3)
+select distinct dept_name 
+from professor p join department d
+on (p.dept_id = d.dept_id)
+where year_emp > 2004;
+
+----------------스크립트 출력--------------------
+
+DEPT_NAME           
+--------------------
+산업공학과
+전자공학과
+
+(4)
+select distinct s.stu_id, s.name
+from takes t join student s
+on(t.stu_id = s.stu_id)
+where t.class_id like '%01' and
+t.grade <= 'B0';
+
+----------------스크립트 출력--------------------
+
+STU_ID     NAME      
+---------- ----------
+1292001    김광식    
+1292002    김정현    
+1292303    박광수    
+1292305    김우주    
+1292501    박철수 
+
+(5)
+select distinct p.name, p.position
+from professor p join class c
+on(p.prof_id = c.prof_id)
+where year = 2012 and semester=1
+order by p.name;
+
+----------------스크립트 출력--------------------
+
+NAME       POSITION  
+---------- ----------
+박철재     조교수    
+이태규     교수      
+장민석     부교수    
+최성희     부교수   
+
+(6)
+select distinct p.name, cs.title
+from course cs join class c on (c.course_id = cs.course_id)
+join professor p on(p.prof_id = c.prof_id)
+where year=2012 and enroll>=40; 
+
+----------------스크립트 출력--------------------
+
+NAME       TITLE               
+---------- --------------------
+최성희     전산개론            
+박철재     컴퓨터구조          
+박철재     인공지능    
+
+(7)
+select course_id, stu_id, grade
+from takes t join class c
+on(t.class_id = c.class_id)
+where year=2012 and semester=2
+order by course_id, stu_id;
+
+----------------스크립트 출력--------------------
+
+COURSE_ID  STU_ID     GRADE
+---------- ---------- -----
+C301       1292001    A0   
+C301       1292305    A+   
+C502       1292002    C+   
+C502       1292303    B0   
+C502       1292305    A+   
+
+(8)
+select distinct s.stu_id, s.name
+from student s join takes t on(s.stu_id = t.stu_id)
+join class c on (c.class_id = t.class_id)
+where c.course_id='C501';
+
+----------------스크립트 출력--------------------
+
+STU_ID     NAME      
+---------- ----------
+1292303    박광수    
+1292502    백태성    
+1292003    김현정    
+1292305    김우주    
+1292501    박철수    
+
+(9)
+select prof_id from professor
+minus
+select prof_id from class c
+where c.semester=2 and c.year=2012;
+
+----------------스크립트 출력--------------------
+
+PROF_ID   
+----------
+92302
+92002
+
+(10)
+select s2.stu_id, s2.name, s2.address
+from student s1, student s2
+where s1.stu_id='1292002' and s1.dept_id = s2.dept_id and s1.name != s2.name;
+
+----------------스크립트 출력--------------------
+
+STU_ID     NAME       ADDRESS   
+---------- ---------- ----------
+1292001    김광식     서울      
+1292003    김현정     대전    
